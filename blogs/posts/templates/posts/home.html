@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h1 class="text-primary mb-4">My Courses</h1>
+
+    <div class="row">
+        {% for post in posts %}
+            {% include "posts/carddetails.html" %}
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
