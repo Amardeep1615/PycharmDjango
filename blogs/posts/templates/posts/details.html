@@ -6,17 +6,18 @@
 {% block css %}
 <link rel="stylesheet" href="{% static 'posts/detail.css' %}">
 {% endblock css %}
-{% block content %}<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
+{% block content %}
+<div class="container ">
+    <div >
+        <div class="">
 
             <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
 
                 {% if post.img %}
-                <div class="bg-light text-center p-4">
+                <div class="bg-light text-center ">
                     <img src="{{ post.img }}"
                          class="img-fluid"
-                         style="max-height: 300px; object-fit: contain;"
+                         style="height: 100px; object-fit: contain;"
                          alt="{{ post.title }}">
                 </div>
                 {% endif %}
@@ -51,4 +52,50 @@
         </div>
     </div>
 </div>
+
+<!--Suggested Tags-->
+<div class="container my-4">
+    <h1 class="mb-3">Suggested Tags</h1>
+
+    {% if tags %}
+    <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+        <div class="card-body p-4">
+            <div class="d-flex flex-wrap gap-2">
+                {% for tag in tags %}
+                    <span class="badge bg-primary rounded-pill px-3 py-2">
+                        {{ tag.tags }}
+                    </span>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="alert alert-light border shadow-sm rounded-4">
+        <p class="mb-0 text-muted">No tags found for this post in the database.</p>
+    </div>
+    {% endif %}
+</div>
+    <div class="container ">
+    <form method="POST">
+        {%  csrf_token %}
+    <h1 class="text-center">Comments</h1>
+        {{form.comment}}
+         <button type="submit" class="btn btn-primary mt-1">Comment</button>
+
+    </form>
+
+
+
+ </div>
+   <div class="container ">
+       {% if comments %}
+        <h3 class="text-center">Previous Comments</h3>
+     {% for comment in comments %}
+       <div class="container ">
+     {{ comment.comment }}
+            </div>
+     {% endfor %}
+
+     {% endif %}
+     </div>
 {% endblock %}
